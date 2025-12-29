@@ -54,7 +54,7 @@ header p {
     font-size: 0.95rem;
 }
 
-/* Founder Button (Left Side) */
+/* Founder Button */
 .founder-btn {
     padding: 8px 14px;
     background: rgba(255,255,255,0.2);
@@ -114,7 +114,6 @@ select:focus {
     max-width: 75%;
     padding: 12px 14px;
     border-radius: 14px;
-    line-height: 1.4;
     font-size: 0.9rem;
 }
 
@@ -128,6 +127,39 @@ select:focus {
     align-self: flex-start;
     background: #f1f5f9;
     border: 1px solid #e2e8f0;
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+
+/* AI message formatting */
+.message.ai p {
+    margin-bottom: 12px;
+}
+
+.message.ai h3,
+.message.ai h4 {
+    margin: 16px 0 8px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.message.ai strong {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.message.ai ul,
+.message.ai ol {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.message.ai li {
+    margin-bottom: 6px;
+}
+
+.message.ai em {
+    font-style: italic;
 }
 
 .meta {
@@ -203,10 +235,15 @@ select:focus {
         text-align: center;
         width: 100%;
     }
+
+    .message.ai {
+        line-height: 1.7;
+        font-size: 0.88rem;
+    }
 }
 
 /* ===============================
-   Founder Page – Proper Styling
+   Founder Page Styling
    =============================== */
 
 .founder-page {
@@ -227,7 +264,6 @@ select:focus {
     overflow: hidden;
 }
 
-/* Header */
 .founder-header {
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     color: white;
@@ -245,13 +281,11 @@ select:focus {
     opacity: 0.9;
 }
 
-/* Body */
 .founder-body {
     padding: 26px;
     text-align: center;
 }
 
-/* Photo */
 .founder-photo {
     width: 180px;
     height: 180px;
@@ -261,14 +295,12 @@ select:focus {
     margin-bottom: 16px;
 }
 
-/* Name */
 .founder-body h2 {
     font-size: 1.5rem;
     margin-bottom: 4px;
     color: #1e293b;
 }
 
-/* Role */
 .founder-role {
     font-size: 0.85rem;
     font-weight: 600;
@@ -276,7 +308,6 @@ select:focus {
     margin-bottom: 18px;
 }
 
-/* Text */
 .founder-text {
     font-size: 0.95rem;
     line-height: 1.7;
@@ -284,7 +315,6 @@ select:focus {
     margin-bottom: 14px;
 }
 
-/* Back Button */
 .back-btn {
     display: inline-block;
     margin-top: 20px;
@@ -303,7 +333,6 @@ select:focus {
     box-shadow: 0 12px 24px rgba(79,70,229,0.35);
 }
 
-/* Mobile */
 @media (max-width: 600px) {
     .founder-body {
         padding: 20px;
@@ -318,5 +347,3 @@ select:focus {
         font-size: 1.4rem;
     }
 }
-
-
