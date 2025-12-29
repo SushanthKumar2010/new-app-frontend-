@@ -1,5 +1,5 @@
 // Backend URL (Render)
-const backendBaseUrl = "https://new-try-zfki.onrender.com";
+const backendBaseUrl = "https://new-backend-5dc3.onrender.com";
 
 // DOM elements (chat UI)
 const classLevelSelect = document.getElementById("classLevel");
@@ -146,3 +146,4 @@ if (questionForm) {
     await sendQuestion();
   });
 }
+
