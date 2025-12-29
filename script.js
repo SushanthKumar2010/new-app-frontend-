@@ -12,10 +12,23 @@ const CHAPTERS = {
     "English": ["Prose", "Poetry", "Grammar"],
     "Hindi": ["गद्य", "पद्य", "వ్యాకరణ"],
     "Mathematics": ["Real Numbers", "Polynomials", "Quadratic Equations", "Triangles"],
-    "Science": ["Chemical Reactions", "Life Processes", "Control & Coordination","Light (Reflection & Refraction, Human Eye)", "Electricity (Current, Potential, Circuits)", "Magnetic Effects of Electric Current", "Sources of Energy"],
-    "Social Studies": ["Nationalism in India", "Industrialization", "Citizenship"]
+    "Science": [
+        "Chemical Reactions",
+        "Life Processes",
+        "Control & Coordination",
+        "Light (Reflection & Refraction, Human Eye)",
+        "Electricity (Current, Potential, Circuits)",
+        "Magnetic Effects of Electric Current",
+        "Sources of Energy"
+    ],
+    "Social Studies": [
+        "Nationalism in India",
+        "Industrialization",
+        "Citizenship"
+    ]
 };
 
+// ---------------- DOM Elements ----------------
 const subjectSelect = document.getElementById("subject");
 const chapterSelect = document.getElementById("chapter");
 const questionInput = document.getElementById("question");
@@ -51,6 +64,7 @@ async function askQuestion() {
     // Add user message
     addMessage("user", question);
 
+    // Reset input
     questionInput.value = "";
     askBtn.disabled = true;
     askBtn.textContent = "ఆలోచిస్తోంది...";
@@ -59,27 +73,27 @@ async function askQuestion() {
         const response = await fetch(`${API_BASE_URL}/api/ask`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Cache-Control": "no-store"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 class_level: "10",
-                subject: subject,
-                chapter: chapter,
-                question: question
+                subject,
+                chapter,
+                question
             })
         });
 
+        // ✅ Read response ONLY ONCE
+        const data = await response.json();
+
         if (!response.ok) {
-            const err = await response.json();
-            throw new Error(err.detail || "Server error");
+            throw new Error(data.detail || "Server error");
         }
 
-        const data = await response.json();
-        addMessage("ai", data.answer, data.meta);
+        addMessage("ai", data.answer, data.meta || null);
 
     } catch (error) {
-        console.error(error);
+        console.error("❌ API Error:", error);
         addMessage("ai", "⚠️ Server error. Please try again.");
     } finally {
         askBtn.disabled = false;
@@ -92,29 +106,44 @@ function addMessage(sender, text, meta = null) {
     const div = document.createElement("div");
     div.className = `message ${sender}`;
 
-    if (sender === "ai" && meta) {
+    // AI message with safe meta handling
+    if (
+        sender === "ai" &&
+        meta &&
+        meta.subject &&
+        meta.chapter
+    ) {
         div.innerHTML = `
             <div class="meta">${meta.subject} • ${meta.chapter}</div>
-            <div class="text">${text}</div>
+            <div class="text">${formatAIText(text)}</div>
         `;
     } else {
-        div.innerHTML = `<div class="text">${text}</div>`;
+        div.innerHTML = `
+            <div class="text">${formatAIText(text)}</div>
+        `;
     }
 
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
 }
 
+// ---------------- Format AI Text ----------------
+// Converts line breaks into paragraphs for clean spacing
+function formatAIText(text) {
+    if (!text) return "";
+
+    return text
+        .split("\n\n")
+        .map(p => `<p>${p.trim()}</p>`)
+        .join("");
+}
+
 // ---------------- Events ----------------
 askBtn.addEventListener("click", askQuestion);
 
-questionInput.addEventListener("keypress", e => {
+questionInput.addEventListener("keydown", e => {
     if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         askQuestion();
     }
 });
-
-
-
-
