@@ -1,12 +1,19 @@
-// ---------------- Backend URL ----------------
-// Option 1 (simple – recommended for now)
-const API_BASE_URL = "https://new-backend-5dc3.onrender.com";
+// Backend URL (Render)
+const backendBaseUrl = "https://new-try-zfki.onrender.com";
 
-// Option 2 (Vercel env var – advanced)
-// const API_BASE_URL = import.meta.env.VITE_API_URL;
+// DOM elements (chat UI)
+const classLevelSelect = document.getElementById("classLevel");
+const subjectSelect = document.getElementById("subject");
+const chapterSelect = document.getElementById("chapter");
+const questionInput = document.getElementById("questionInput");
+const sendBtn = document.getElementById("sendBtn");
+const chatWindow = document.getElementById("chatWindow");
 
+// Optional: simple form elements (if you still have a basic form)
+const questionForm = document.getElementById("questionForm");
+const responseDiv = document.getElementById("response");
 
-// ---------------- Chapters ----------------
+// Same chapter lists as backend
 const CHAPTERS = {
     "Telugu": ["కథలు", "కవిత్వం", "వ్యాకరణం"],
     "English": ["Prose", "Poetry", "Grammar"],
@@ -28,122 +35,114 @@ const CHAPTERS = {
     ]
 };
 
-// ---------------- DOM Elements ----------------
-const subjectSelect = document.getElementById("subject");
-const chapterSelect = document.getElementById("chapter");
-const questionInput = document.getElementById("question");
-const askBtn = document.getElementById("ask");
-const chat = document.getElementById("chat");
+function populateChapters() {
+  const subject = subjectSelect.value;
+  chapterSelect.innerHTML = "";
+  CHAPTERS[subject].forEach(ch => {
+    const opt = document.createElement("option");
+    opt.value = ch;
+    opt.textContent = ch;
+    chapterSelect.appendChild(opt);
+  });
+}
 
-// ---------------- Update Chapters ----------------
-function updateChapters() {
-    const subject = subjectSelect.value;
-    chapterSelect.innerHTML = "";
+subjectSelect.addEventListener("change", populateChapters);
+// Initial population
+populateChapters();
 
-    if (!CHAPTERS[subject]) return;
+function appendMessage(role, text, meta) {
+  const row = document.createElement("div");
+  row.classList.add("message-row", role);
 
-    CHAPTERS[subject].forEach(ch => {
-        const option = document.createElement("option");
-        option.value = ch;
-        option.textContent = ch;
-        chapterSelect.appendChild(option);
+  const bubble = document.createElement("div");
+  bubble.classList.add("message-bubble");
+
+  if (role === "bot" && meta) {
+    const metaDiv = document.createElement("div");
+    metaDiv.classList.add("meta-text");
+    metaDiv.textContent = `${meta.class_level} • ${meta.subject} • ${meta.chapter}`;
+    bubble.appendChild(metaDiv);
+  }
+
+  const p = document.createElement("div");
+  p.innerText = text;
+  bubble.appendChild(p);
+
+  row.appendChild(bubble);
+  chatWindow.appendChild(row);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+async function sendQuestion() {
+  const question = questionInput.value.trim();
+  if (!question) return;
+
+  const classLevel = classLevelSelect.value;
+  const subject = subjectSelect.value;
+  const chapter = chapterSelect.value;
+
+  // User message
+  appendMessage("user", question);
+
+  // Clear input & disable while waiting
+  questionInput.value = "";
+  questionInput.disabled = true;
+  sendBtn.disabled = true;
+  sendBtn.textContent = "Thinking...";
+
+  try {
+    const response = await fetch(`${backendBaseUrl}/api/ask`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        class_level: classLevel,
+        subject: subject,
+        chapter: chapter,
+        question: question
+      })
     });
-}
 
-subjectSelect.addEventListener("change", updateChapters);
-updateChapters(); // initial load
-
-// ---------------- Ask Question ----------------
-async function askQuestion() {
-    const question = questionInput.value.trim();
-    if (!question) return;
-
-    const subject = subjectSelect.value;
-    const chapter = chapterSelect.value;
-
-    // Add user message
-    addMessage("user", question);
-
-    // Reset input
-    questionInput.value = "";
-    askBtn.disabled = true;
-    askBtn.textContent = "ఆలోచిస్తోంది...";
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/api/ask`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                class_level: "10",
-                subject,
-                chapter,
-                question
-            })
-        });
-
-        // ✅ Read response ONLY ONCE
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.detail || "Server error");
-        }
-
-        addMessage("ai", data.answer, data.meta || null);
-
-    } catch (error) {
-        console.error("❌ API Error:", error);
-        addMessage("ai", "⚠️ Server error. Please try again.");
-    } finally {
-        askBtn.disabled = false;
-        askBtn.textContent = "ప్రశ్న విసురు / Ask";
-    }
-}
-
-// ---------------- Add Message ----------------
-function addMessage(sender, text, meta = null) {
-    const div = document.createElement("div");
-    div.className = `message ${sender}`;
-
-    // AI message with safe meta handling
-    if (
-        sender === "ai" &&
-        meta &&
-        meta.subject &&
-        meta.chapter
-    ) {
-        div.innerHTML = `
-            <div class="meta">${meta.subject} • ${meta.chapter}</div>
-            <div class="text">${formatAIText(text)}</div>
-        `;
+    if (!response.ok) {
+      let errMsg = "Something went wrong.";
+      try {
+        const errData = await response.json();
+        if (errData.detail) errMsg = errData.detail;
+      } catch (_) {}
+      appendMessage("bot", `Error: ${errMsg}`);
+      if (responseDiv) responseDiv.innerText = `Error: ${errMsg}`;
     } else {
-        div.innerHTML = `
-            <div class="text">${formatAIText(text)}</div>
-        `;
+      const data = await response.json();
+      appendMessage("bot", data.answer, data.meta);
+      if (responseDiv) responseDiv.innerText = data.answer || "No answer.";
     }
-
-    chat.appendChild(div);
-    chat.scrollTop = chat.scrollHeight;
+  } catch (err) {
+    console.error(err);
+    appendMessage("bot", "Network error. Please try again.");
+    if (responseDiv) responseDiv.innerText = "Error contacting server. Please try again.";
+  } finally {
+    questionInput.disabled = false;
+    sendBtn.disabled = false;
+    sendBtn.textContent = "Ask";
+    questionInput.focus();
+  }
 }
 
-// ---------------- Format AI Text ----------------
-// Converts line breaks into paragraphs for clean spacing
-function formatAIText(text) {
-    if (!text) return "";
-
-    return text
-        .split("\n\n")
-        .map(p => `<p>${p.trim()}</p>`)
-        .join("");
-}
-
-// ---------------- Events ----------------
-askBtn.addEventListener("click", askQuestion);
-
-questionInput.addEventListener("keydown", e => {
-    if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        askQuestion();
-    }
+// Chat UI events
+sendBtn.addEventListener("click", sendQuestion);
+questionInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendQuestion();
+  }
 });
+
+// Optional: support a simple form submit (if present)
+if (questionForm) {
+  questionForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    // Reuse the chat sendQuestion logic
+    await sendQuestion();
+  });
+}
