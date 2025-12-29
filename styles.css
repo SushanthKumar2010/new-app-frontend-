@@ -232,6 +232,7 @@ select:focus {
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     color: white;
     padding: 22px;
+    align-items: center;
 }
 
 .founder-header h1 {
@@ -317,3 +318,4 @@ select:focus {
         font-size: 1.4rem;
     }
 }
+
