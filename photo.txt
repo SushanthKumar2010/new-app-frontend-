@@ -1,0 +1,5 @@
+    <img
+                src="https://via.placeholder.com/180"
+                alt="Founder Photo"
+                class="founder-photo"
+            />
