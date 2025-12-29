@@ -12,7 +12,7 @@ const CHAPTERS = {
     "English": ["Prose", "Poetry", "Grammar"],
     "Hindi": ["गद्य", "पद्य", "వ్యాకరణ"],
     "Mathematics": ["Real Numbers", "Polynomials", "Quadratic Equations", "Triangles"],
-    "Science": ["Chemical Reactions", "Life Processes", "Control & Coordination"],
+    "Science": ["Chemical Reactions", "Life Processes", "Control & Coordination","Light (Reflection & Refraction, Human Eye)", "Electricity (Current, Potential, Circuits)", "Magnetic Effects of Electric Current", "Sources of Energy"],
     "Social Studies": ["Nationalism in India", "Industrialization", "Citizenship"]
 };
 
@@ -114,6 +114,7 @@ questionInput.addEventListener("keypress", e => {
         askQuestion();
     }
 });
+
 
 
 
