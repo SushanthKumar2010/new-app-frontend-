@@ -1,6 +1,6 @@
 // ---------------- Backend URL ----------------
 // Option 1 (simple – recommended for now)
-const API_BASE_URL = "https://new-app-backend-bp5i.onrender.com";
+const API_BASE_URL = "https://new-backend-5dc3.onrender.com";
 
 // Option 2 (Vercel env var – advanced)
 // const API_BASE_URL = import.meta.env.VITE_API_URL;
@@ -114,5 +114,6 @@ questionInput.addEventListener("keypress", e => {
         askQuestion();
     }
 });
+
 
 
