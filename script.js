@@ -10,9 +10,49 @@ const chat = document.getElementById("chat");
 
 // ---------------- Chapters (MUST MATCH BACKEND) ----------------
 const CHAPTERS = {
-    "Telugu": ["కథలు", "కవిత్వం", "వ్యాకరణం"],
-    "English": ["Prose", "Poetry", "Grammar"],
-    "Hindi": ["गद्य", "पद्य", "व्याकरण"],
+    "Telugu": ["దేశభక్తిు", 
+               "సత్యం", 
+               "మన సంస్కృతి",
+               "జగదీశ చంద్రబోస్",
+               "మానవతా విలువలు",
+               "అతిథి దేవోభవ",
+               "దేశగౌరవం",
+               "మాతృభాష",
+               "శాంతి సందేశం",
+               "జాతీయ గీతం",
+               "మన జీవన లక్ష్యం",
+               "వ్యాకరణం"],
+    
+    "English": ["A Reading Lesson", 
+                "Attitude is Altitude", 
+                "Every Success Story is also a Story of Great Failure",
+                "Mahatma Gandhi – Pusher of Salt Satyagraha",
+                "The Journey",
+                "Another Woman",
+                "Jagadish Chandra Bose",
+                "The Never–Never Nest",
+                "My Childhood",
+                "Where the Mind is Without Fear",
+                "The Song of the Rain",
+                "Once Upon a Time",
+                "Not Just a Teacher, but a Friend",
+                "The Tale of Custard the Dragon",
+                "Grammar"
+                
+               ],
+    
+    "Hindi": ["ईदगाह", 
+              "नेताजी का चश्माय", 
+              "डायरी का एक पन्ना",
+              "अपना-अपना भाग्य",
+              "संकल्प शक्ति",
+              "सूरदास के पद",
+              "रहीम के दोहे",
+              "कबीर के दोहे",
+              "देशप्रेम",
+              "मेघ आए",
+              "व्याकरण"],
+    
     "Mathematics": [
         "Real numbers",
         "Sets",
@@ -159,5 +199,6 @@ questionInput.addEventListener("keydown", e => {
         askQuestion();
     }
 });
+
 
 
