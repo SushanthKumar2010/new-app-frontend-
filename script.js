@@ -107,7 +107,7 @@ const CHAPTERS = {
         "Management of Natural Resources"
     ],
 
-    "Social Science": [
+    "Social Studies": [
         // History
         "The Rise of Nationalism in Europe",
         "Nationalism in India",
@@ -241,6 +241,7 @@ questionInput.addEventListener("keydown", e => {
         askQuestion();
     }
 });
+
 
 
 
