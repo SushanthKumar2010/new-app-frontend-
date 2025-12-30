@@ -9,8 +9,8 @@ const askBtn = document.getElementById("ask");
 const chat = document.getElementById("chat");
 
 // ---------------- Chapters (MUST MATCH BACKEND) ----------------
-const CHAPTERS = {
-    const CHAPTERS = {
+
+ const CHAPTERS = {
 
         "Telugu": [
     "Supplementary Reader",
@@ -241,6 +241,7 @@ questionInput.addEventListener("keydown", e => {
         askQuestion();
     }
 });
+
 
 
 
