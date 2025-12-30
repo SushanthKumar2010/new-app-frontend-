@@ -10,99 +10,139 @@ const chat = document.getElementById("chat");
 
 // ---------------- Chapters (MUST MATCH BACKEND) ----------------
 const CHAPTERS = {
-    "Telugu": ["దేశభక్తి ", 
-               "సత్యం", 
-               "మన సంస్కృతి",
-               "జగదీశ చంద్రబోస్",
-               "మానవతా విలువలు",
-               "అతిథి దేవోభవ",
-               "దేశగౌరవం",
-               "మాతృభాష",
-               "శాంతి సందేశం",
-               "జాతీయ గీతం",
-               "మన జీవన లక్ష్యం",
-               "వ్యాకరణం"],
-    
-    "English": ["A Reading Lesson", 
-                "Attitude is Altitude", 
-                "Every Success Story is also a Story of Great Failure",
-                "Mahatma Gandhi – Pusher of Salt Satyagraha",
-                "The Journey",
-                "Another Woman",
-                "Jagadish Chandra Bose",
-                "The Never–Never Nest",
-                "My Childhood",
-                "Where the Mind is Without Fear",
-                "The Song of the Rain",
-                "Once Upon a Time",
-                "Not Just a Teacher, but a Friend",
-                "The Tale of Custard the Dragon",
-                "Grammar"
-                
-               ],
-    
-    "Hindi": ["ईदगाह", 
-              "नेताजी का चश्माय", 
-              "डायरी का एक पन्ना",
-              "अपना-अपना भाग्य",
-              "संकल्प शक्ति",
-              "सूरदास के पद",
-              "रहीम के दोहे",
-              "कबीर के दोहे",
-              "देशप्रेम",
-              "मेघ आए",
-              "व्याकरण"],
-    
+    const CHAPTERS = {
+
+    "English": [
+        // First Flight (Prose)
+        "A Letter to God",
+        "Nelson Mandela: Long Walk to Freedom",
+        "Two Stories about Flying",
+        "From the Diary of Anne Frank",
+        "The Hundred Dresses – I",
+        "The Hundred Dresses – II",
+        "Glimpses of India",
+        "Mijbil the Otter",
+        "Madam Rides the Bus",
+        "The Sermon at Benares",
+        "The Proposal",
+
+        // Poetry
+        "Dust of Snow",
+        "Fire and Ice",
+        "A Tiger in the Zoo",
+        "How to Tell Wild Animals",
+        "The Ball Poem",
+        "Amanda!",
+        "Animals",
+        "The Trees",
+        "Fog",
+        "The Tale of Custard the Dragon",
+        "For Anne Gregory",
+
+        // Grammar
+        "Grammar"
+    ],
+
+    "Hindi": [
+        // Kshitij
+        "सूरदास के पद",
+        "राम-लक्ष्मण-परशुराम संवाद",
+        "आत्मकथ्य",
+        "उत्साह",
+        "अट नहीं रही है",
+        "तोप",
+        "कर चले हम फ़िदा",
+        "आत्मत्राण",
+
+        // Kritika
+        "माता का आँचल",
+        "जॉर्ज पंचम की नाक",
+        "साना-साना हाथ जोड़ि",
+        "एही ठैयाँ झुलनी हेरानी हो राम!",
+        "मैं क्यों लिखता हूँ",
+
+        // Grammar
+        "व्याकरण"
+    ],
+
     "Mathematics": [
-        "Real numbers",
-        "Sets",
+        "Real Numbers",
         "Polynomials",
         "Pair of Linear Equations in Two Variables",
         "Quadratic Equations",
         "Arithmetic Progressions",
+        "Triangles",
         "Coordinate Geometry",
-        "Similar Triangles",
-        "Mensuration",
-        "Probability",
+        "Trigonometry",
+        "Applications of Trigonometry",
+        "Circles",
+        "Constructions",
+        "Areas Related to Circles",
+        "Surface Areas and Volumes",
         "Statistics",
-        "Trigonometry and applications",
-        "Circle geometry & tangents"
-        ],
-    
+        "Probability"
+    ],
+
     "Science": [
-        "Heat and Temperature",
-        "Human Eye & Colourful World",
-        "Light: Reflection & Refraction",
-        "Electric Current and Magnetism",
-        "Classification of Elements (Periodic Table)",
-        "Chemical Reactions",
-        "Acids, Bases & Salts",
-        "Carbon & its Compounds",
-        "Nutrition",
-        "Respiration",
-        "Transportation",
-        "Excretion",
-        "Coordination in Plants & Animals",
-        "Reproduction",
-        "Heredity",
-        "Environment & Natural Resources"
-         ],
-    
-    "Social Studies": [
-        "World between wars",
-        "National liberation movements",
-        "National movement in India",
-        "Making of independent India’s constitution",
-        "Post-independence politics",
-        "Relief features of India",
-        "Climate",
-        "People & Migration",
-        "Food security",
-        "Sustainable development",
-        "Citizen and government (Civics)",
-        
-    ]
+        "Chemical Reactions and Equations",
+        "Acids, Bases and Salts",
+        "Metals and Non-metals",
+        "Carbon and its Compounds",
+        "Life Processes",
+        "Control and Coordination",
+        "How do Organisms Reproduce",
+        "Heredity and Evolution",
+        "Light – Reflection and Refraction",
+        "The Human Eye and the Colourful World",
+        "Electricity",
+        "Magnetic Effects of Electric Current",
+        "Our Environment",
+        "Management of Natural Resources"
+    ],
+
+    "Social Science": [
+        // History
+        "The Rise of Nationalism in Europe",
+        "Nationalism in India",
+        "The Making of a Global World",
+        "The Age of Industrialisation",
+        "Print Culture and the Modern World",
+
+        // Geography
+        "Resources and Development",
+        "Forest and Wildlife Resources",
+        "Water Resources",
+        "Agriculture",
+        "Minerals and Energy Resources",
+        "Manufacturing Industries",
+        "Lifelines of National Economy",
+
+        // Civics
+        "Power Sharing",
+        "Federalism",
+        "Democracy and Diversity",
+        "Gender, Religion and Caste",
+        "Popular Struggles and Movements",
+        "Political Parties",
+        "Outcomes of Democracy",
+
+        // Economics
+        "Development",
+        "Sectors of the Indian Economy",
+        "Money and Credit",
+        "Globalisation and the Indian Economy",
+        "Consumer Rights"
+    ],
+
+        "Telugu": [
+    "Supplementary Reader",
+    "Grammar (వ్యాకరణం)",
+    "Reading Comprehension",
+    "Writing Skills"
+]
+
 };
+
 
 // ---------------- Populate Chapters ----------------
 function updateChapters() {
@@ -199,6 +239,7 @@ questionInput.addEventListener("keydown", e => {
         askQuestion();
     }
 });
+
 
 
 
