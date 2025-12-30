@@ -12,7 +12,7 @@ const chat = document.getElementById("chat");
 const CHAPTERS = {
     "Telugu": ["కథలు", "కవిత్వం", "వ్యాకరణం"],
     "English": ["Prose", "Poetry", "Grammar"],
-    "Hindi": ["गद्य", "पद्य", "వ్యాకరణ"],
+    "Hindi": ["गद्य", "पद्य", "व्याकरण"],
     "Mathematics": [
         "Real Numbers",
         "Polynomials",
@@ -130,3 +130,4 @@ questionInput.addEventListener("keydown", e => {
         askQuestion();
     }
 });
+
