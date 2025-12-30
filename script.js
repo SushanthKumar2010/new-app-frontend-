@@ -12,6 +12,13 @@ const chat = document.getElementById("chat");
 const CHAPTERS = {
     const CHAPTERS = {
 
+        "Telugu": [
+    "Supplementary Reader",
+    "Grammar (వ్యాకరణం)",
+    "Reading Comprehension",
+    "Writing Skills"
+    ],
+        
     "English": [
         // First Flight (Prose)
         "A Letter to God",
@@ -132,14 +139,9 @@ const CHAPTERS = {
         "Money and Credit",
         "Globalisation and the Indian Economy",
         "Consumer Rights"
-    ],
+    ]
 
-        "Telugu": [
-    "Supplementary Reader",
-    "Grammar (వ్యాకరణం)",
-    "Reading Comprehension",
-    "Writing Skills"
-]
+        
 
 };
 
@@ -239,6 +241,7 @@ questionInput.addEventListener("keydown", e => {
         askQuestion();
     }
 });
+
 
 
 
