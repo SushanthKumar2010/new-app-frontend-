@@ -10,7 +10,7 @@ const chat = document.getElementById("chat");
 
 // ---------------- Chapters (MUST MATCH BACKEND) ----------------
 const CHAPTERS = {
-    "Telugu": ["దేశభక్తిు", 
+    "Telugu": ["దేశభక్తి ", 
                "సత్యం", 
                "మన సంస్కృతి",
                "జగదీశ చంద్రబోస్",
@@ -199,6 +199,7 @@ questionInput.addEventListener("keydown", e => {
         askQuestion();
     }
 });
+
 
 
 
