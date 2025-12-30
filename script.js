@@ -14,24 +14,53 @@ const CHAPTERS = {
     "English": ["Prose", "Poetry", "Grammar"],
     "Hindi": ["गद्य", "पद्य", "व्याकरण"],
     "Mathematics": [
-        "Real Numbers",
+        "Real numbers",
+        "Sets",
         "Polynomials",
+        "Pair of Linear Equations in Two Variables",
         "Quadratic Equations",
-        "Triangles"
-    ],
+        "Arithmetic Progressions",
+        "Coordinate Geometry",
+        "Similar Triangles",
+        "Mensuration",
+        "Probability",
+        "Statistics",
+        "Trigonometry and applications",
+        "Circle geometry & tangents"
+        ],
+    
     "Science": [
+        "Heat and Temperature",
+        "Human Eye & Colourful World",
+        "Light: Reflection & Refraction",
+        "Electric Current and Magnetism",
+        "Classification of Elements (Periodic Table)",
         "Chemical Reactions",
-        "Life Processes",
-        "Control & Coordination",
-        "Light (Reflection & Refraction, Human Eye)",
-        "Electricity (Current, Potential, Circuits)",
-        "Magnetic Effects of Electric Current",
-        "Sources of Energy"
-    ],
+        "Acids, Bases & Salts",
+        "Carbon & its Compounds",
+        "Nutrition",
+        "Respiration",
+        "Transportation",
+        "Excretion",
+        "Coordination in Plants & Animals",
+        "Reproduction",
+        "Heredity",
+        "Environment & Natural Resources"
+         ],
+    
     "Social Studies": [
-        "Nationalism in India",
-        "Industrialization",
-        "Citizenship"
+        "World between wars",
+        "National liberation movements",
+        "National movement in India",
+        "Making of independent India’s constitution",
+        "Post-independence politics",
+        "Relief features of India",
+        "Climate",
+        "People & Migration",
+        "Food security",
+        "Sustainable development",
+        "Citizen and government (Civics)",
+        
     ]
 };
 
@@ -130,4 +159,5 @@ questionInput.addEventListener("keydown", e => {
         askQuestion();
     }
 });
+
 
