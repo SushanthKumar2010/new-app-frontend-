@@ -21,6 +21,7 @@ const chat = document.getElementById("chat");
         
     "English": [
         // First Flight (Prose)
+        "Supplementary Reader",
         "A Letter to God",
         "Nelson Mandela: Long Walk to Freedom",
         "Two Stories about Flying",
@@ -241,6 +242,7 @@ questionInput.addEventListener("keydown", e => {
         askQuestion();
     }
 });
+
 
 
 
