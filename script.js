@@ -246,6 +246,36 @@ questionInput.addEventListener("keydown", e => {
 
 
 
+const fileInput = document.getElementById("file-upload");
+const previewContainer = document.getElementById("image-preview");
+
+fileInput.addEventListener("change", () => {
+    previewContainer.innerHTML = "";
+
+    const file = fileInput.files[0];
+    if (!file || !file.type.startsWith("image/")) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+        const div = document.createElement("div");
+        div.className = "preview-item";
+
+        div.innerHTML = `
+            <img src="${reader.result}" />
+            <span class="remove-img">×</span>
+        `;
+
+        div.querySelector(".remove-img").onclick = () => {
+            div.remove();
+            fileInput.value = "";
+        };
+
+        previewContainer.appendChild(div);
+    };
+
+    reader.readAsDataURL(file);
+});
+
 
 
 
